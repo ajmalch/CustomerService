@@ -2,6 +2,7 @@ package com.example.jpaaudit.model;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -9,14 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @RequiredArgsConstructor
-public class Customer {
+public class Customer implements AuditableEntity{
 
     @GeneratedValue
     @Id
@@ -25,14 +26,17 @@ public class Customer {
     private final String uniqueName;
 
     @LastModifiedDate
-    private LocalDate lastModifiedDate;
+    private LocalDateTime lastModifiedDate;
 
-    private final String firstName, lsatName;
+    @LastModifiedBy
+    private String lastModifiedUser;
+
+    private final String firstName, lastName;
     private final Gender gender;
 
     public Customer(){
         this.firstName = null;
-        this.lsatName = null;
+        this.lastName = null;
         this.gender = null;
         this.uniqueName = null;
     }

@@ -9,4 +9,6 @@ import java.util.Optional;
 @RepositoryRestResource
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
+    Optional<Customer> findCustomerByFirstName(String firstName);
+
 }
