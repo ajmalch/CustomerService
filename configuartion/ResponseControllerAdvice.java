@@ -10,8 +10,7 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import javax.persistence.EntityListeners;
-import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedType;
 import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.List;
@@ -21,9 +20,9 @@ public class ResponseControllerAdvice implements ResponseBodyAdvice<AuditableEnt
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
 
-        List<Annotation> annotations = Arrays.asList(methodParameter.getParameterType().getAnnotations());
+        List<AnnotatedType> interfaces = Arrays.asList(methodParameter.getParameterType().getAnnotatedInterfaces());
 
-        return annotations.stream().anyMatch(type -> type.annotationType().equals(EntityListeners.class));
+        return interfaces.stream().anyMatch(interfaceType -> interfaceType.getType().getTypeName().equals("com.example.jpaaudit.model.AuditableEntity"));
 
     }
 
@@ -32,7 +31,7 @@ public class ResponseControllerAdvice implements ResponseBodyAdvice<AuditableEnt
 
         HttpHeaders headers = serverHttpResponse.getHeaders();
         headers.add("LastModifiedBy", auditableEntity.getLastModifiedUser());
-        headers.setLastModified(auditableEntity.getLastModifiedDate().toEpochSecond(ZoneOffset.UTC)*1000);
+        headers.setLastModified(auditableEntity.getLastModifiedDate().toEpochSecond(ZoneOffset.UTC) * 1000);
 
         return auditableEntity;
     }
