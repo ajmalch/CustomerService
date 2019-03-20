@@ -10,13 +10,21 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import javax.persistence.EntityListeners;
+import java.lang.annotation.Annotation;
 import java.time.ZoneOffset;
+import java.util.Arrays;
+import java.util.List;
 
 @RestControllerAdvice
 public class ResponseControllerAdvice implements ResponseBodyAdvice<AuditableEntity> {
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
-        return true; //we are supporting all entities implementing this interface
+
+        List<Annotation> annotations = Arrays.asList(methodParameter.getParameterType().getAnnotations());
+
+        return annotations.stream().anyMatch(type -> type.annotationType().equals(EntityListeners.class));
+
     }
 
     @Override
