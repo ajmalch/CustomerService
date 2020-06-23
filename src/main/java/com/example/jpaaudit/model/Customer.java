@@ -41,9 +41,9 @@ public class Customer implements AuditableEntity{
         this.uniqueName = null;
     }
 
-    public static enum Gender{
+    public enum Gender{
         MALE,
-        FEMALE;
+        FEMALE
     }
 
 }

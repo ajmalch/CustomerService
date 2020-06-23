@@ -30,6 +30,7 @@ public class ResponseControllerAdvice implements ResponseBodyAdvice<AuditableEnt
     public AuditableEntity beforeBodyWrite(AuditableEntity auditableEntity, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
 
         HttpHeaders headers = serverHttpResponse.getHeaders();
+        //TODO getLastModifiedUser call null pointer exception handling
         headers.add("LastModifiedBy", auditableEntity.getLastModifiedUser());
         headers.setLastModified(auditableEntity.getLastModifiedDate().toEpochSecond(ZoneOffset.UTC) * 1000);
 
