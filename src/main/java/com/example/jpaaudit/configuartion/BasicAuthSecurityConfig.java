@@ -28,7 +28,8 @@ public class BasicAuthSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests(authRequest -> authRequest.anyRequest().authenticated() )
+        http.csrf().disable()
+                .authorizeRequests(authRequest -> authRequest.anyRequest().authenticated() )
                 .httpBasic()
                 .authenticationEntryPoint(authenticationEntryPoint);
 
