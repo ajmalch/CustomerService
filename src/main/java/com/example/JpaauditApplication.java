@@ -2,7 +2,9 @@ package com.example;
 
 import com.example.jpaaudit.model.Customer;
 import com.example.jpaaudit.repository.CustomerRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -19,10 +21,13 @@ import java.util.TimeZone;
 @SpringBootApplication
 @EnableJpaAuditing
 @RestController
+@RequiredArgsConstructor
 public class JpaauditApplication {
 
-    @Autowired
-    CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
+
+    @Value("${auth.mode}")
+    private String authMode;
 
     public static void main(String[] args) {
         SpringApplication.run(JpaauditApplication.class, args);
@@ -33,9 +38,11 @@ public class JpaauditApplication {
 
         TimeZone.setDefault(TimeZone.getTimeZone("GMT")); //Setting default time zone to GMT so that Last modified time will be shown in GMT in response header.
 
-        //URL encoding for # is %23 . So, if firstname is in the URL, #ajmal below should change to %23ajmal in the URL
-        customerRepository.save(new Customer("ajmal", "#Ajmal", "Cholassery", Customer.Gender.MALE));
-        customerRepository.save(new Customer("shadiya", "Shadiya", "Kundi", Customer.Gender.FEMALE));
+        if("disable".equals(authMode)){
+            //URL encoding for # is %23 . So, if firstname is in the URL, #ajmal below should change to %23ajmal in the URL
+            customerRepository.save(new Customer("ajmal", "#Ajmal", "Cholassery", Customer.Gender.MALE));
+            customerRepository.save(new Customer("shadiya", "Shadiya", "Kundi", Customer.Gender.FEMALE));
+        }
 
     }
 
