@@ -3,24 +3,16 @@ package com.example;
 import com.example.jpaaudit.model.Customer;
 import com.example.jpaaudit.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.annotation.ApplicationScope;
 
 import javax.annotation.PostConstruct;
 import java.util.TimeZone;
 
 @SpringBootApplication
 @EnableJpaAuditing
-@RestController
 @RequiredArgsConstructor
 public class JpaauditApplication {
 
@@ -46,16 +38,4 @@ public class JpaauditApplication {
 
     }
 
-    @GetMapping("clients")
-    public Customer getCustomer() {
-        return customerRepository.findById(1L)
-                .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
-    }
-
-    @GetMapping("/customer/{firstName}")
-    public Customer getCustomerByFirstName(@PathVariable String firstName) {
-
-        return customerRepository.findCustomerByFirstName(firstName)
-                .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
-    }
 }
