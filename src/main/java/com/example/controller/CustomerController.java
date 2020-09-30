@@ -14,17 +14,13 @@ public class CustomerController {
 
     private final CustomerRepository customerRepository;
 
-    @GetMapping("/clients")
-    public Customer getCustomer() {
-        return customerRepository.findById(1L)
-                .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
-    }
-
     @GetMapping("/customer/{firstName}")
     public Customer getCustomerByFirstName(@PathVariable String firstName) {
 
         return customerRepository.findCustomerByFirstName(firstName)
-                .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Customer with firstname "+firstName+" not found"));
     }
 
 }
