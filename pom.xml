@@ -17,6 +17,9 @@
 
     <properties>
         <java.version>14</java.version>
+        <sonar.projectKey>ajmalch_jpaaudit</sonar.projectKey>
+        <sonar.organization>ajmalch</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     <dependencies>
         <dependency>
