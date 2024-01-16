@@ -4,3 +4,8 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

@@ -7,4 +7,5 @@ public interface AuditableEntity {
     LocalDateTime getLastModifiedDate();
     String getLastModifiedUser();
 
+    String getCreatedBy();
 }

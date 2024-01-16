@@ -1,9 +1,7 @@
 package com.example.jpaaudit.configuartion;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -25,12 +23,11 @@ public class OidcSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests(authRequest -> authRequest.anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2->
-                        oauth2.jwt(Customizer.withDefaults()));
+                        oauth2.jwt().jwtAuthenticationConverter(jwtAuthenticationConverter()));
 
 
     }
 
-    @Bean
     JwtAuthenticationConverter jwtAuthenticationConverter(){
         JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
         converter.setJwtGrantedAuthoritiesConverter(new CustomJwtGrantedAuthoritiesConverter());

@@ -2,6 +2,7 @@ package com.example.jpaaudit.model;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -30,6 +31,9 @@ public class Customer implements AuditableEntity{
 
     @LastModifiedBy
     private String lastModifiedUser;
+
+    @CreatedBy
+    private String createdBy;
 
     private final String firstName, lastName;
     private final Gender gender;
