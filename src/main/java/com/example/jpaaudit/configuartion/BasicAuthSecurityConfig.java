@@ -8,14 +8,27 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @ConditionalOnProperty(value = "auth.mode", havingValue = "basic")
 @EnableWebSecurity
-public class BasicAuthSecurityConfig extends WebSecurityConfigurerAdapter {
+public class BasicAuthSecurityConfig {
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(authRequest -> authRequest
+                        .requestMatchers(HttpMethod.OPTIONS).permitAll()
+                        .anyRequest().authenticated()
+                )
+                .httpBasic(httpSecurityHttpBasicConfigurer -> httpSecurityHttpBasicConfigurer.authenticationEntryPoint(authenticationEntryPoint));
+        return http.build();
+    }
 
     @Autowired
     private MyBasicAuthenticationEntryPoint authenticationEntryPoint;
@@ -25,18 +38,6 @@ public class BasicAuthSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("user1").password(passwordEncoder().encode("password"))
                 .authorities("ROLE_USER");
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests(authRequest -> authRequest
-                        .antMatchers(HttpMethod.OPTIONS).permitAll()
-                        .anyRequest().authenticated() )
-                .httpBasic()
-                .authenticationEntryPoint(authenticationEntryPoint);
-
     }
 
     @Bean

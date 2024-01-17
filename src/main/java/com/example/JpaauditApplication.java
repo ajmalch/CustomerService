@@ -2,13 +2,13 @@ package com.example;
 
 import com.example.jpaaudit.model.Customer;
 import com.example.jpaaudit.repository.CustomerRepository;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-import javax.annotation.PostConstruct;
 import java.util.TimeZone;
 
 @SpringBootApplication
