@@ -32,8 +32,8 @@ public class JpaauditApplication {
 
         if("disable".equals(authMode)){
             //URL encoding for # is %23 . So, if firstname is in the URL, #ajmal below should change to %23ajmal in the URL
-            customerRepository.save(new Customer("ajmal", "#Ajmal", "Cholassery", Customer.Gender.MALE));
-            customerRepository.save(new Customer("shadiya", "Shadiya", "Kundi", Customer.Gender.FEMALE));
+            customerRepository.save(new Customer("#Ajmal", "Cholassery", Customer.Gender.MALE));
+            customerRepository.save(new Customer("Shadiya", "Kundi", Customer.Gender.FEMALE));
         }
 
     }

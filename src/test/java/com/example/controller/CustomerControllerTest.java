@@ -28,14 +28,13 @@ class CustomerControllerTest {
     void getCustomerByFirstNameShouldCallCustomerRepository() {
 
         when(customerRepository.findCustomerByFirstName(anyString()))
-                .thenReturn(Optional.of(new Customer("ajmal"
-                        , "Ajmal"
+                .thenReturn(Optional.of(new Customer("Ajmal"
                         , "Cholassery"
                         , Customer.Gender.MALE)));
 
         customerController.getCustomerByFirstName("ajmal");
         verify(customerRepository, times(1))
-                .findCustomerByFirstName(eq("ajmal"));
+                .findCustomerByFirstName("ajmal");
 
     }
 

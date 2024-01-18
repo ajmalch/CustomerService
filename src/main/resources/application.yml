@@ -3,9 +3,34 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+          jwk-set-uri: ${oauth.jwkSetUri}
 management:
   endpoints:
     web:
       exposure:
         include: '*'
+---
+spring:
+  config:
+    activate:
+      on-profile: development
+  datasource:
+    url: ${dataSourceUrl}
+    driver-class-name: org.postgresql.Driver
+    username: ${dataSourceUserName}
+    password: ${dataSourcePassword}
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:h2:mem:test_db
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+
