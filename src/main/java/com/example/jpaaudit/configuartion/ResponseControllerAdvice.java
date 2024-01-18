@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import java.lang.reflect.AnnotatedType;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,8 +32,22 @@ public class ResponseControllerAdvice implements ResponseBodyAdvice<AuditableEnt
 
         HttpHeaders headers = serverHttpResponse.getHeaders();
         //TODO getLastModifiedUser call null pointer exception handling
-        headers.add("LastModifiedBy", auditableEntity.getLastModifiedUser());
-        headers.setLastModified(auditableEntity.getLastModifiedDate().toEpochSecond(ZoneOffset.UTC) * 1000);
+        if(auditableEntity != null){
+
+            if(auditableEntity.getLastModifiedBy() != null){
+                headers.add("LastModifiedBy", auditableEntity.getLastModifiedBy());
+            }
+            if(auditableEntity.getLastModifiedDate() != null){
+                headers.setLastModified(auditableEntity.getLastModifiedDate().toEpochSecond(ZoneOffset.UTC) * 1000);
+            }
+            if(auditableEntity.getCreatedBy() != null){
+                headers.add("CreatedBy" , auditableEntity.getCreatedBy());
+            }
+            if (auditableEntity.getCreatedDate() != null) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+                headers.add("Created",auditableEntity.getCreatedDate().atOffset(ZoneOffset.UTC).format(formatter));
+            }
+        }
 
         return auditableEntity;
     }

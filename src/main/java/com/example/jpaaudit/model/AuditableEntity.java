@@ -5,7 +5,9 @@ import java.time.LocalDateTime;
 public interface AuditableEntity {
 
     LocalDateTime getLastModifiedDate();
-    String getLastModifiedUser();
+    String getLastModifiedBy();
 
     String getCreatedBy();
+
+    LocalDateTime getCreatedDate();
 }
