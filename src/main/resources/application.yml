@@ -19,6 +19,8 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: ${dataSourceUserName}
     password: ${dataSourcePassword}
+springdoc:
+  enable-spring-security: true
 ---
 spring:
   config:

@@ -1,9 +1,13 @@
 package com.example.jpaaudit.configuartion;
 
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -18,14 +22,18 @@ import java.util.Collection;
 @Configuration
 @ConditionalOnProperty(value = "auth.mode", havingValue = "oidc")
 @EnableWebSecurity
+@SecurityScheme(name = "security_auth", type = SecuritySchemeType.OPENIDCONNECT, openIdConnectUrl = "${openIdConnectUrl}" )
 public class OidcSecurityConfig{
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authRequest ->
-                        authRequest.anyRequest().authenticated()
+                        authRequest.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                                .requestMatchers("/swagger-ui.html","/swagger-ui/**","/v3/api-docs/**").permitAll()
+                                .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2->
                         oauth2.jwt(jwt-> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())));

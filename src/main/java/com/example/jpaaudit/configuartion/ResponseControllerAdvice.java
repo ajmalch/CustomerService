@@ -1,6 +1,6 @@
 package com.example.jpaaudit.configuartion;
 
-import com.example.jpaaudit.model.AuditableEntity;
+import com.example.jpaaudit.customer.AuditableEntity;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -23,7 +23,7 @@ public class ResponseControllerAdvice implements ResponseBodyAdvice<AuditableEnt
 
         List<AnnotatedType> interfaces = Arrays.asList(methodParameter.getParameterType().getAnnotatedInterfaces());
 
-        return interfaces.stream().anyMatch(interfaceType -> interfaceType.getType().getTypeName().equals("com.example.jpaaudit.model.AuditableEntity"));
+        return interfaces.stream().anyMatch(interfaceType -> interfaceType.getType().getTypeName().equals("com.example.jpaaudit.customer.AuditableEntity"));
 
     }
 
@@ -44,7 +44,7 @@ public class ResponseControllerAdvice implements ResponseBodyAdvice<AuditableEnt
                 headers.add("CreatedBy" , auditableEntity.getCreatedBy());
             }
             if (auditableEntity.getCreatedDate() != null) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+                DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
                 headers.add("Created",auditableEntity.getCreatedDate().atOffset(ZoneOffset.UTC).format(formatter));
             }
         }

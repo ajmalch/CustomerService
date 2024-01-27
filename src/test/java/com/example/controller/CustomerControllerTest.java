@@ -1,7 +1,8 @@
 package com.example.controller;
 
-import com.example.jpaaudit.model.Customer;
-import com.example.jpaaudit.repository.CustomerRepository;
+import com.example.jpaaudit.customer.Customer;
+import com.example.jpaaudit.customer.CustomerController;
+import com.example.jpaaudit.customer.CustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
