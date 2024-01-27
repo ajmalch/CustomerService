@@ -1,7 +1,6 @@
-package com.example.controller;
+package com.example.jpaaudit.customer;
 
-import com.example.jpaaudit.model.Customer;
-import com.example.jpaaudit.repository.CustomerRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/customers")
+@SecurityRequirement(name = "security_auth")
 public class CustomerController {
 
     private final CustomerRepository customerRepository;

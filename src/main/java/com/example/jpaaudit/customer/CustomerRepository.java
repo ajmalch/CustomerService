@@ -1,6 +1,5 @@
-package com.example.jpaaudit.repository;
+package com.example.jpaaudit.customer;
 
-import com.example.jpaaudit.model.Customer;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
