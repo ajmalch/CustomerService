@@ -1,4 +1,4 @@
-package com.example.jpaaudit.configuartion;
+package com.example.configuartion;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.AuditorAware;

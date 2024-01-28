@@ -1,4 +1,4 @@
-package com.example.jpaaudit.configuartion;
+package com.example.configuartion;
 
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;

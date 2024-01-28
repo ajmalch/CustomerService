@@ -1,4 +1,4 @@
-package com.example.jpaaudit.customer;
+package com.example.customer;
 
 import java.time.LocalDateTime;
 

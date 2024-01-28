@@ -8,7 +8,7 @@ plugins {
 
 sonar {
     properties {
-        property "sonar.projectKey", "JPAAudit"
+        property "sonar.projectKey", "CustomerService"
         property "sonar.organization", "ajmalch"
         property "sonar.host.url", "https://sonarcloud.io"
     }

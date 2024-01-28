@@ -1,4 +1,4 @@
-package com.example.jpaaudit.customer;
+package com.example.customer;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;

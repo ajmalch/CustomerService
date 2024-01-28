@@ -1,4 +1,4 @@
-package com.example.jpaaudit.configuartion;
+package com.example.configuartion;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -1,4 +1,4 @@
-package com.example.jpaaudit;
+package com.example;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;

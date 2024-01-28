@@ -1,4 +1,4 @@
-package com.example.jpaaudit.customer;
+package com.example.customer;
 
 import jakarta.persistence.*;
 import lombok.Data;

@@ -1,6 +1,6 @@
-package com.example.jpaaudit.configuartion;
+package com.example.configuartion;
 
-import com.example.jpaaudit.customer.AuditableEntity;
+import com.example.customer.AuditableEntity;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -23,7 +23,7 @@ public class ResponseControllerAdvice implements ResponseBodyAdvice<AuditableEnt
 
         List<AnnotatedType> interfaces = Arrays.asList(methodParameter.getParameterType().getAnnotatedInterfaces());
 
-        return interfaces.stream().anyMatch(interfaceType -> interfaceType.getType().getTypeName().equals("com.example.jpaaudit.customer.AuditableEntity"));
+        return interfaces.stream().anyMatch(interfaceType -> interfaceType.getType().getTypeName().equals("com.example.customer.AuditableEntity"));
 
     }
 

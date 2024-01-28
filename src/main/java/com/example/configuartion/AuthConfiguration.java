@@ -1,4 +1,4 @@
-package com.example.jpaaudit.configuartion;
+package com.example.configuartion;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
