@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @SpringBootApplication
 @EnableJpaAuditing
 @RequiredArgsConstructor
-public class JpaauditApplication {
+public class CustomerServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JpaauditApplication.class, args);
+        SpringApplication.run(CustomerServiceApplication.class, args);
     }
 }
