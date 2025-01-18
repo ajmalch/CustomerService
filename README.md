@@ -3,7 +3,7 @@
 **Instructions to start the application**
 
 Application can be started in 3 different security modes
-1.  disable (diosable)
+1.  disable (disable)
 2. basic http security (basic)
 3. open id connect (oidc)
 
@@ -18,3 +18,10 @@ In addition to that, following VM arguments should be set accordingly
 For OIDC security mode, following additional VM arguments are expected
 1. oauth.jwkSetUri
 2. openIdConnectUrl (used in open API swagger , currently not working)
+
+Example VM arguments
+-Dauth.mode=oidc
+-Doauth.jwkSetUri=https://www.googleapis.com/oauth2/v3/certs
+-DdataSourceUrl=jdbc:postgresql://localhost:5432/AjmalCholassery
+-DdataSourceUserName=ajmal
+-DdataSourcePassword=training
