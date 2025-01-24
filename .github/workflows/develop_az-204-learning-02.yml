@@ -56,11 +56,11 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_53FD3B83F6E64E5D97EABBFB1B2E76EB }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_89386EC911044908B7A438E22F43D93C }}
 
-      - name: Deploy to Azure Web App
+      - name: Deploy to Azure Wed App as spring boot app
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@v3
+        uses: azure/spring-apps-deploy@v1
         with:
           app-name: 'az-204-learning-02'
-          slot-name: 'Production'
           package: '*.jar'
-          
+          service-name: 'az-204-learning-02'
+          azure-subscription: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_89386EC911044908B7A438E22F43D93C }}
