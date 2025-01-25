@@ -26,7 +26,7 @@ public class Customer implements AuditableEntity{
     @Column(name = "LAST_NAME")
     private final String lastName;
     @Column(name = "GENDER")
-    @Convert(converter = GenderAttributConverter.class)
+    @Convert(converter = GenderAttributeConverter.class)
     private final Gender gender;
     @SequenceGenerator(name="customer_id_seq",
             sequenceName="customer_id_sequence",

@@ -4,7 +4,7 @@ import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
 @Converter
-public class GenderAttributConverter implements AttributeConverter <Customer.Gender,Integer> {
+public class GenderAttributeConverter implements AttributeConverter <Customer.Gender,Integer> {
     @Override
     public Integer convertToDatabaseColumn(Customer.Gender gender) {
         if(gender == null){
