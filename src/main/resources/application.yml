@@ -16,23 +16,9 @@ spring:
       on-profile: development
   datasource:
     url: ${dataSourceUrl}
-    driver-class-name: org.postgresql.Driver
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     username: ${dataSourceUserName}
     password: ${dataSourcePassword}
 springdoc:
   enable-spring-security: true
----
-spring:
-  config:
-    activate:
-      on-profile: test
-  datasource:
-    url: jdbc:h2:mem:test_db
-    driver-class-name: org.h2.Driver
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    generate-ddl: true
-    show-sql: true
-    hibernate:
-      ddl-auto: create
 
